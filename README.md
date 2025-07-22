@@ -1,3 +1,3 @@
-# MoonhotelsHUB
+# HotelManager
 
-Proyecto Java para la integración con proveedores de hoteles.
+Basic hotel manager with Java, Springboot and Thymeleaf
