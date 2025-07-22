@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Reservas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">Gestión Hotelera</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="mb-4">Reservas</h1>
+
+  <form th:action="@{/bookings}" th:object="${booking}" method="post" class="mb-4">
+    <input type="hidden" th:field="*{id}" />
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="hotel" class="form-label">Hotel</label>
+        <select th:field="*{hotel.id}" id="hotel" class="form-select" required>
+          <option value="" disabled selected>-- Seleccione un hotel --</option>
+          <option th:each="h : ${hotels}" th:value="${h.id}" th:text="${h.name}"></option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="client" class="form-label">Cliente</label>
+        <select th:field="*{client.id}" id="client" class="form-select" required>
+          <option value="" disabled selected>-- Seleccione un cliente --</option>
+          <option th:each="c : ${clients}" th:value="${c.id}" th:text="${c.name}"></option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+
+  <table class="table table-striped table-hover">
+    <thead class="table-primary">
+      <tr>
+        <th>Hotel</th>
+        <th>Cliente</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="b : ${bookings}">
+        <td th:text="${b.hotel.name}">Hotel</td>
+        <td th:text="${b.client.name}">Cliente</td>
+        <td>
+          <a th:href="@{'/bookings/edit/' + ${b.id}}" class="btn btn-sm btn-warning me-2">Editar</a>
+          <a th:href="@{'/bookings/delete/' + ${b.id}}" class="btn btn-sm btn-danger"
+             onclick="return confirm('¿Eliminar reserva?')">Eliminar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a href="/" class="btn btn-secondary mt-3">Volver</a>
+</div>
+
+</body>
+</html>

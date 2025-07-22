@@ -1,0 +1,17 @@
+app:
+  data-type: DB  # DB: For Oracle DataBase. FS: For FileSystem on JSON.
+  fs-folder: ./data
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: hotelmanager
+    password: hotelmanager
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+server:
+  port: 8081
